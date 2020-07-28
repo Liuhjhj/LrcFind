@@ -11,6 +11,7 @@ class Informaton(object):
     def get_song_information(self, song_list):
         song_infor = []
         for song in song_list:
+            ## print(song)
             song = song['name'] + '-' + song['ar'][0]['name'] + '-' + song['al']['name']
             song_infor.append(song)
         return song_infor

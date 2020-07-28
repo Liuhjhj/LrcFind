@@ -21,8 +21,10 @@ class Lyric_api(object):    # 根据歌曲id查找歌词
             page = requests.session().get(web, headers=head, timeout=timeout)
             page.encoding = 'UTF-8'
             a = page.text
+            print(a)
             b = json.loads(a)   # str转dic
             return b['lrc']['lyric']
         except Exception as e:
-            print(e)
-            return 'Error'
+            information = "当前歌曲无歌词"
+            print(information)
+            return information

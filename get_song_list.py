@@ -82,7 +82,7 @@ class Music_api:
     # 这样，接收方可以通过私钥解密密文3获得seckey(随机数)
     # 然后用seckey解密密文2获得密文1
     # 最终用统一协商的密钥nonce解密密文1最终获得text
-    def search(self, s, offset, type="1"):
+    def data(self, s, offset, type="1"):
         text = {"hlpretag": "<span class=\"s-fc7\">",
                 "hlposttag": "</span>",
                 "#/discover": "",
@@ -99,6 +99,9 @@ class Music_api:
             'params': params,
             'encSecKey': encSecKey
         }
+        return data
+
+    def result(self, data):
         result = requests.post(url=self.url,
                                data=data,
                                headers=self.HEADER).json()
@@ -108,7 +111,7 @@ class Music_api:
     def get_music_list(self, keywords):
         music_list = []
         for offset in range(1):
-            result = Music_api().search(keywords, str(offset))
+            result = Music_api().result(Music_api().data(keywords, str(offset)))
             result = result['result']['songs']
             for music in result:
                 # 剔除无版权歌曲
@@ -122,5 +125,9 @@ class Music_api:
                 '''
                 music_list.append(music)
         return music_list
+
+    def get_data(self, keywords):
+        return Music_api().data(keywords, str(0))
+
 
 # print(Music_api().get_music_list("庐州月"))  # 测试
