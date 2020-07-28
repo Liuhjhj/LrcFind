@@ -4,6 +4,8 @@
 @Author         :  Liuhjhj
 @File           :  Window.py
 """
+from PyQt5 import QtCore
+
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QComboBox, QTextEdit, QHBoxLayout, \
     QVBoxLayout, QDesktopWidget
@@ -69,6 +71,7 @@ class Window(QWidget):
         self.label = QLabel('歌曲名')
         self.song_name = QLineEdit()
         self.btn = QPushButton('开始查询')
+        self.btn.setShortcut(QtCore.Qt.Key_Return)
         self.btn2 = QPushButton('歌词')
         self.btn3 = QPushButton('热门评论')
         self.combobox = QComboBox()
